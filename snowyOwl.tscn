@@ -12,7 +12,8 @@ radius = 22.2791
 height = 29.3867
 
 [node name="snowyOwl" type="KinematicBody2D"]
-position = Vector2( -0.280617, 0 )
+collision_layer = 4
+collision_mask = 4
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -34,7 +35,10 @@ shape = SubResource( 2 )
 modulate = Color( 0.584314, 0.133333, 0.133333, 0.752941 )
 self_modulate = Color( 0.584314, 0.133333, 0.133333, 0.752941 )
 position = Vector2( -5.59521, -28.8061 )
+enabled = true
 cast_to = Vector2( 0, 400 )
+collision_mask = 2
+collide_with_areas = true
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PoolVector2Array( 586.075, 231.673, 509.458, 131.892 )
