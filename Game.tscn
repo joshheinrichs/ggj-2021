@@ -7,7 +7,7 @@
 extents = Vector2( 720, 25 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 37.6445, 151.305 )
+extents = Vector2( 37.6445, 251.263 )
 
 [node name="Game" type="Node"]
 
@@ -28,7 +28,7 @@ shape = SubResource( 1 )
 position = Vector2( 590.701, 381.085 )
 
 [node name="Tree" type="Area2D" parent="."]
-position = Vector2( 304.687, 285.088 )
+position = Vector2( 382.049, 236.316 )
 __meta__ = {
 "_edit_group_": true
 }
