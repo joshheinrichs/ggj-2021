@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Bug.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Asset/Pixel Art Forest/PNG/tree01.png" type="Texture" id=4]
+[ext_resource path="res://Bug.gd" type="Script" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2312, 25 )
@@ -22,6 +25,19 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource( 1 )
 
+[node name="Tree" type="Area2D" parent="."]
+position = Vector2( 568, 216 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
+shape = SubResource( 2 )
+
+[node name="tree01" type="Sprite" parent="Tree"]
+position = Vector2( 56, 40 )
+texture = ExtResource( 4 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 360, 384 )
 
@@ -29,11 +45,24 @@ position = Vector2( 360, 384 )
 position = Vector2( 0, -144 )
 current = true
 
-[node name="Tree" type="Area2D" parent="."]
-position = Vector2( 382.049, 236.316 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Swarm" type="Node2D" parent="."]
+position = Vector2( 112, 280 )
+script = ExtResource( 5 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
-shape = SubResource( 2 )
+[node name="Bug" parent="Swarm" instance=ExtResource( 3 )]
+position = Vector2( -72, 88 )
+
+[node name="Bug2" parent="Swarm" instance=ExtResource( 3 )]
+position = Vector2( -64, 8 )
+
+[node name="Bug3" parent="Swarm" instance=ExtResource( 3 )]
+position = Vector2( 16, 40 )
+
+[node name="Bug4" parent="Swarm" instance=ExtResource( 3 )]
+position = Vector2( 8, -24 )
+
+[node name="Bug5" parent="Swarm" instance=ExtResource( 3 )]
+position = Vector2( 72, -8 )
+
+[node name="Bug6" parent="Swarm" instance=ExtResource( 3 )]
+position = Vector2( -48, -48 )
