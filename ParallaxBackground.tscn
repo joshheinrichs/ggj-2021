@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background B layer3.png" type="Texture" id=1]
-[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background B layer4.png" type="Texture" id=2]
-[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background B layer1.png" type="Texture" id=3]
-[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background B layer2.png" type="Texture" id=4]
+[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background C layer1.png" type="Texture" id=1]
+[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background C layer3.png" type="Texture" id=2]
+[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background C layer4.png" type="Texture" id=3]
+[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background C layer2.png" type="Texture" id=4]
 
 [node name="ParallaxBackground" type="ParallaxBackground"]
 
@@ -14,7 +14,7 @@ motion_scale = Vector2( 0.5, 1 )
 margin_left = -1648.0
 margin_right = 4184.0
 margin_bottom = 480.0
-texture = ExtResource( 3 )
+texture = ExtResource( 1 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,7 +41,7 @@ motion_offset = Vector2( 0.7, 0 )
 margin_left = -1640.0
 margin_right = 4176.0
 margin_bottom = 480.0
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 stretch_mode = 2
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
@@ -51,7 +51,7 @@ motion_scale = Vector2( 0.9, 1 )
 margin_left = -1640.0
 margin_right = 4184.0
 margin_bottom = 480.0
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 stretch_mode = 2
 __meta__ = {
 "_edit_use_anchors_": false

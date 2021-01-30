@@ -55,4 +55,6 @@ jump={
 
 [rendering]
 
+quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.0901961, 0.172549, 0.192157, 1 )
 environment/default_environment="res://default_env.tres"
