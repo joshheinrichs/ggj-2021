@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 const MAX_DISTANCE = 100
 const MAX_VELOCITY = 10
