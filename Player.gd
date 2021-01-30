@@ -69,5 +69,3 @@ func _on_Overlap_Area_area_entered(area):
 
 func _on_Overlap_Area_area_exited(area):
 	state = RUNNING
-
-
