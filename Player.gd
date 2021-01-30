@@ -18,8 +18,10 @@ const JUMP = -650
 
 var move_vec = Vector2.ZERO
 var current_area
-
+export var score = 0
 var treeInRange = false
+
+signal found_bug
 
 func _physics_process(delta):
 	var direction = Vector2.ZERO
@@ -75,6 +77,8 @@ func _physics_process(delta):
 	move_vec = move_and_slide(move_vec, UP)
 			
 func _on_Overlap_Area_area_entered(area):
+	if area.name == "Bug":
+		emit_signal("found_bug")
 	treeInRange = true
 	current_area = area
 		
@@ -82,3 +86,6 @@ func _on_Overlap_Area_area_entered(area):
 func _on_Overlap_Area_area_exited(area):
 	treeInRange = false
 	state = RUNNING
+
+
+
