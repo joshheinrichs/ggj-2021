@@ -1,19 +1,41 @@
 extends KinematicBody2D
 
-const MOVE_SPEED = 500
+const UP = Vector2(0,-1)
+const GRAVITY = 20
+const JUMP = -600
+const MOVE_SPEED = 20
+const MAX_SPEED = 0
+const DECCEL = 0.9
+var move_vec = Vector2()
+var leftright = 0
 
 func _physics_process(delta):
-	var move_vec = Vector2()
-	if Input.is_action_pressed("move_up"):
-		move_vec.y -= 1
-	if Input.is_action_pressed("move_down"):
-		move_vec.y += 1
-	if Input.is_action_pressed("move_left"):
-		move_vec.x -= 1
-	if Input.is_action_pressed("move_right"):
-		move_vec.x += 1
-	move_vec = move_vec.normalized()
-	move_and_collide(move_vec * MOVE_SPEED * delta)
+		
+#	if Input.is_action_pressed("move_up"):
+#		move_vec.y = -1 * MOVE_SPEED
+#	if Input.is_action_pressed("move_down"):
+#		move_vec.y = 1 * MOVE_SPEED
+	if Input.is_action_pressed("move_right") and is_on_floor():
+		move_vec.x += 1	* MOVE_SPEED
+	elif Input.is_action_pressed("move_left") and is_on_floor():
+		move_vec.x -= 1	* MOVE_SPEED
+	else:
+		if is_on_floor():
+			move_vec.x *= DECCEL
 	
-	var look_vec = get_global_mouse_position() - global_position
-	global_rotation = atan2(look_vec.y, look_vec.x)
+	
+
+	#move_vec = move_vec.normalized() * MOVE_SPEED 
+	
+	move_vec.y += GRAVITY
+	
+	move_vec = move_and_slide(move_vec, UP)
+	
+	if is_on_floor() and Input.is_action_just_pressed("jump"):
+		move_vec.y = JUMP
+	
+	
+	
+	
+#	var look_vec = get_global_mouse_position() - global_position
+#	global_rotation = atan2(look_vec.y, look_vec.x)
