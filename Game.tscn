@@ -1,14 +1,19 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background B complete.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 527.705, 33.9063 )
+extents = Vector2( 720, 25 )
 
 [node name="Game" type="Node"]
 
+[node name="Background" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+centered = false
+
 [node name="Ground" type="StaticBody2D" parent="."]
-position = Vector2( 515.418, 584.34 )
+position = Vector2( 720, 475 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -17,4 +22,4 @@ __meta__ = {
 shape = SubResource( 1 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 433.903, 363.267 )
+position = Vector2( 590.701, 381.085 )
