@@ -17,6 +17,8 @@ var playerFound = false
 var prey = null
 var preyVec = Vector2.ZERO
 
+func _on_Timer_timeout():
+	pass # Replace with function body.
 
 func _ready():
 	var rayPoints = [get_node("RayCast2D").position,get_node("RayCast2D").cast_to]
@@ -43,6 +45,9 @@ func _process(delta):
 			preyVec += move_and_slide(preyVec, UP)
 		PATROL:
 			pass
+
+
+
 
 
 
