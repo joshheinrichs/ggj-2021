@@ -9,6 +9,8 @@ const DECCEL = 0.9
 var move_vec = Vector2()
 var leftright = 0
 
+onready var Overlap = $Overlap_Area
+
 func _physics_process(delta):
 		
 #	if Input.is_action_pressed("move_up"):
@@ -39,3 +41,7 @@ func _physics_process(delta):
 	
 #	var look_vec = get_global_mouse_position() - global_position
 #	global_rotation = atan2(look_vec.y, look_vec.x)
+
+
+func _on_Overlap_Area_area_entered(area):
+	print("It works")
