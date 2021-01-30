@@ -8,15 +8,19 @@ const MAX_SPEED = 0
 const DECCEL = 0.9
 var move_vec = Vector2()
 var leftright = 0
+var treeInRange = false
 
 onready var Overlap = $Overlap_Area
 
+
 func _physics_process(delta):
 		
-#	if Input.is_action_pressed("move_up"):
-#		move_vec.y = -1 * MOVE_SPEED
-#	if Input.is_action_pressed("move_down"):
-#		move_vec.y = 1 * MOVE_SPEED
+	if treeInRange == true:	
+		if Input.is_action_pressed("move_up"):
+			move_vec.y -= 1 * MOVE_SPEED
+		if Input.is_action_pressed("move_down"):
+			move_vec.y += 1 * MOVE_SPEED
+
 	if Input.is_action_pressed("move_right") and is_on_floor():
 		move_vec.x += 1	* MOVE_SPEED
 	elif Input.is_action_pressed("move_left") and is_on_floor():
@@ -28,8 +32,8 @@ func _physics_process(delta):
 	
 
 	#move_vec = move_vec.normalized() * MOVE_SPEED 
-	
-	move_vec.y += GRAVITY
+	if treeInRange == false:
+		move_vec.y += GRAVITY
 	
 	move_vec = move_and_slide(move_vec, UP)
 	
@@ -44,4 +48,11 @@ func _physics_process(delta):
 
 
 func _on_Overlap_Area_area_entered(area):
-	print("It works")
+	print("It's " + area.name)
+	if area.name == "Tree":
+		treeInRange = true
+
+
+func _on_Overlap_Area_area_exited(area):
+	if area.name == "Tree":
+		treeInRange = false
