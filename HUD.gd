@@ -33,6 +33,7 @@ func _on_Player_found_bug():
 	$Score.text = String(score) + "/" + String(goal)
 
 func _on_Player_killed():
+	$Died/Items.text = "{score}/{goal} COLLECTED".format({"score": score, "goal": goal})
 	$Died.show()
 
 func _on_Timer_timeout():

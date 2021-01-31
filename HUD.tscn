@@ -226,7 +226,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label2" type="Label" parent="Died"]
+[node name="You Died" type="Label" parent="Died"]
 margin_top = 1.0
 margin_right = 75.0
 margin_bottom = 14.0
@@ -241,7 +241,7 @@ margin_bottom = 32.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="Died"]
+[node name="Items" type="Label" parent="Died"]
 margin_top = 36.0
 margin_right = 75.0
 margin_bottom = 49.0
