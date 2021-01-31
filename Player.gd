@@ -66,8 +66,10 @@ func _physics_process(delta):
 				animatedSprite.play("glide")
 				move_vec.y = JUMP
 			
+			if !is_on_floor():
+				animatedSprite.play("glide")
+			
 #			if Input.is_action_pressed("jump") and move_vec.y > GLIDE:
-#				animatedSprite.play("glide")
 #				move_vec.y = GLIDE
 				
 		CLIMB_TREE:
@@ -87,7 +89,6 @@ func _physics_process(delta):
 				move_vec.y = 0
 
 			if Input.is_action_just_pressed("jump"):
-				animatedSprite.play("glide")
 				move_vec.y = JUMP
 				move_vec.x = MAX_SPEED * direction.x
 				state = RUNNING
