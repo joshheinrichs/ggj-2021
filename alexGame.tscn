@@ -46,7 +46,6 @@ texture = ExtResource( 5 )
 position = Vector2( 360, 384 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 0, 0 )
 current = true
 limit_bottom = 500
 
