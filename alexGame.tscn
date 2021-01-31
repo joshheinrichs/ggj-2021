@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Bug.gd" type="Script" id=1]
 [ext_resource path="res://Bug.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Asset/Pixel Art Forest/PNG/tree01.png" type="Texture" id=5]
 [ext_resource path="res://snowyOwl.tscn" type="PackedScene" id=6]
+[ext_resource path="res://owlBranch.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2312, 25 )
@@ -47,7 +48,7 @@ position = Vector2( 0, -144 )
 current = true
 
 [node name="snowyOwl" parent="." instance=ExtResource( 6 )]
-position = Vector2( 188.582, 124.1 )
+position = Vector2( 629.833, 177.29 )
 
 [node name="Swarm" type="Node2D" parent="."]
 position = Vector2( 112, 280 )
@@ -70,3 +71,14 @@ position = Vector2( 72, -8 )
 
 [node name="Bug6" parent="Swarm" instance=ExtResource( 2 )]
 position = Vector2( -48, -48 )
+
+[node name="owlBranches" type="Node" parent="."]
+
+[node name="owlBranch" parent="owlBranches" instance=ExtResource( 7 )]
+position = Vector2( 645.808, 190.043 )
+
+[node name="owlBranch2" parent="owlBranches" instance=ExtResource( 7 )]
+position = Vector2( 160.543, 166.489 )
+
+[node name="owlBranch3" parent="owlBranches" instance=ExtResource( 7 )]
+position = Vector2( 794.39, 284.22 )
