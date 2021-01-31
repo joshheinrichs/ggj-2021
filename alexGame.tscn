@@ -46,8 +46,9 @@ texture = ExtResource( 5 )
 position = Vector2( 360, 384 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 0, -144 )
+position = Vector2( 0, 0 )
 current = true
+limit_bottom = 500
 
 [node name="Swarm" type="Node2D" parent="."]
 position = Vector2( 112, 280 )
@@ -90,3 +91,4 @@ position = Vector2( 794.39, 284.22 )
 
 [node name="snowyOwl" parent="." instance=ExtResource( 6 )]
 position = Vector2( 434.803, 117.83 )
+RANGE = 200
