@@ -16,10 +16,10 @@ func _ready():
 func _process(_delta):
 	if int($Mission_Timer.time_left) != 0:
 		current_time = mission_time - int($Mission_Timer.time_left)
-	$Mission_TimerTime.text = String(int($Mission_TimerTimer.time_left))
+	$Time.text = String(int($Mission_Timer.time_left))
 	
 	if score == goal:
-		$Mission_TimerTimer.stop()
+		$Mission_Timer.stop()
 		$Items_Collected/Items.text = String(score) + "/" + String(goal) + " COLLECTED"
 		$Items_Collected/Time.text = "In " + String(current_time) + " Seconds"
 		$Items_Collected.show()
