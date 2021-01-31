@@ -32,6 +32,8 @@ func _on_Player_found_bug():
 	score = score + 1
 	$Score.text = String(score) + "/" + String(goal)
 
+func _on_Player_killed():
+	$Died.show()
 
 func _on_Timer_timeout():
 #	$Tween.interpolate_property(ColorRect,"color", "00ffffff", "00000000", EASE_IN, Ease_OUT, 4)
@@ -51,7 +53,3 @@ func next_day():
 	$Score.text = String(score) + "/" + String(goal)
 	$"/root/Globals".play = false
 	$Mission_Timer.start(mission_time)
-	
-
-
-

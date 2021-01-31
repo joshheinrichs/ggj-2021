@@ -65,13 +65,9 @@ func move_at_target(target, delta):
 	move_and_slide(velocity)
 
 func _process(delta):
-	if caughtPrey:
-		currentPrey.position = self.position + Vector2(0, $CollisionShape2D.shape.height)
-		# TODO: kinda hacky, should call currentPrey.caught() or something to fix camera jitters
-		currentPrey.move_vec = Vector2.ZERO
-
 	match state:
 		WAIT:
+			velocity = Vector2.ZERO
 			#start ray and beam
 			$Line2D.visible = true
 			$RayCast2D.enabled = true
@@ -96,7 +92,6 @@ func _process(delta):
 
 			for thing in $Area2D.get_overlapping_areas():
 				if thing == currentBranch:
-					velocity = Vector2.ZERO
 					start_wait()
 		ATTACK:
 			$Line2D.visible = true
@@ -115,6 +110,9 @@ func _process(delta):
 
 			for thing in $Area2D.get_overlapping_areas():
 				if thing.get_parent() == currentPrey:
+					currentPrey.kill()
 					caughtPrey = true
-					# TODO: grab prey
 					start_patrol()
+
+	if caughtPrey:
+		currentPrey.position = self.position + Vector2(0, $CollisionShape2D.shape.height)

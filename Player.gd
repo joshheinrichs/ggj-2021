@@ -24,10 +24,15 @@ var tree_shape
 export var score = 0
 var treeInRange = false
 var flipped_sprite = false
+var alive = true
 
 signal found_bug
+signal killed
 
 func _physics_process(delta):
+	if not alive:
+		return
+
 	var direction = Vector2.ZERO
 	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	direction.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
@@ -126,4 +131,6 @@ func check_tree_side():
 	if self.position.x > tree_shape.position.x:
 		self.position.x = tree_shape.position.x + (tree_shape.get_child(0).shape.extents.x)
 
-
+func kill():
+	self.alive = false
+	emit_signal("killed")
