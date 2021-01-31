@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Asset/Pixel Art Forest/PNG/tree01.png" type="Texture" id=4]
 [ext_resource path="res://Bug.gd" type="Script" id=5]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://TileMap.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2312, 25 )
@@ -97,4 +98,7 @@ shape = SubResource( 2 )
 [node name="tree01" type="Sprite" parent="Trees/Tree3"]
 position = Vector2( 56, 40 )
 texture = ExtResource( 4 )
+
+[node name="TileMap" parent="." instance=ExtResource( 7 )]
+tile_data = PoolIntArray( 524286, 1, 0, 524287, 1, 0, 458752, 1, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0 )
 [connection signal="found_bug" from="Player" to="Ground/CollisionShape2D/Control" method="_on_Player_found_bug"]
