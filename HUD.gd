@@ -6,6 +6,7 @@ var totalScore = 0
 var days = 1
 var current_time
 var mission_time = 60
+var game_over = false
 
 func _ready():
 	$Mission_Timer.start(mission_time)
@@ -33,12 +34,15 @@ func _process(_delta):
 		$Items_Collected/Time.text = "In " + String(current_time) + " Seconds"
 		$Items_Collected.show()
 		_on_Timer_timeout()
+	elif game_over:
+		$Mission_Timer.stop()
 	
 func _on_Player_found_bug():
 	score = score + 1
 	$Score.text = String(score) + "/" + String(goal)
 
 func _on_Player_killed():
+	game_over = true
 	$Died/Items.text = "{score}/{goal} COLLECTED".format({"score": score, "goal": goal})
 	$Died.show()
 

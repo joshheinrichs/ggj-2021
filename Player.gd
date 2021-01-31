@@ -113,6 +113,9 @@ func _physics_process(delta):
 	move_vec = move_and_slide(move_vec, UP)
 			
 func _on_Overlap_Area_area_entered(area):
+	if not alive:
+		return
+
 	if area.is_in_group("Food"):
 		emit_signal("found_bug")
 		$pickUp.play()

@@ -11,8 +11,8 @@
 motion_scale = Vector2( 0.5, 1 )
 
 [node name="background B layer1" type="TextureRect" parent="ParallaxLayer"]
-margin_left = -1648.0
-margin_right = 4184.0
+margin_left = -5e+06
+margin_right = 5e+06
 margin_bottom = 480.0
 texture = ExtResource( 1 )
 stretch_mode = 2
@@ -24,8 +24,8 @@ __meta__ = {
 motion_scale = Vector2( 0.6, 1 )
 
 [node name="background B layer2" type="TextureRect" parent="ParallaxLayer2"]
-margin_left = -1648.0
-margin_right = 4192.0
+margin_left = -5e+06
+margin_right = 5e+06
 margin_bottom = 480.0
 texture = ExtResource( 4 )
 stretch_mode = 2
@@ -38,8 +38,8 @@ motion_scale = Vector2( 0.7, 1 )
 motion_offset = Vector2( 0.7, 0 )
 
 [node name="background B layer3" type="TextureRect" parent="ParallaxLayer3"]
-margin_left = -1640.0
-margin_right = 4176.0
+margin_left = -5e+06
+margin_right = 5e+06
 margin_bottom = 480.0
 texture = ExtResource( 2 )
 stretch_mode = 2
@@ -48,8 +48,8 @@ stretch_mode = 2
 motion_scale = Vector2( 0.9, 1 )
 
 [node name="background B layer4" type="TextureRect" parent="ParallaxLayer4"]
-margin_left = -1640.0
-margin_right = 4184.0
+margin_left = -5e+06
+margin_right = 5e+06
 margin_bottom = 480.0
 texture = ExtResource( 3 )
 stretch_mode = 2
