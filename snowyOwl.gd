@@ -65,7 +65,7 @@ func move_at_target(target):
 
 func _process(delta):
 	if caughtPrey:
-		currentPrey.position = self.position
+		currentPrey.position = self.position + Vector2(0, $CollisionShape2D.shape.height)
 		# TODO: kinda hacky, should call currentPrey.caught() or something to fix camera jitters
 		currentPrey.move_vec = Vector2.ZERO
 
