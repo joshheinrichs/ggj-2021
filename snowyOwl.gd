@@ -39,7 +39,7 @@ func start_wait():
 
 func start_patrol():
 	state = PATROL
-	var owlBranches = get_tree().get_nodes_in_group("owlBranchGroup")
+	var owlBranches = get_tree().get_nodes_in_group("owlBranches")
 	owlBranches.shuffle()
 	if owlBranches[0] != currentBranch:
 		currentBranch = owlBranches[0]

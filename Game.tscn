@@ -1,28 +1,63 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Asset/Pixel Art Forest/PNG/Backgrounds/background B complete.png" type="Texture" id=2]
+[ext_resource path="res://ParallaxBackground.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Bug.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Asset/sound/81 Contryside in Summertime.ogg" type="AudioStream" id=5]
 [ext_resource path="res://hideyHole.tscn" type="PackedScene" id=6]
+[ext_resource path="res://TileMap.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Tree.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Asset/Pixel Art Forest/PNG/trees.png" type="Texture" id=9]
+[ext_resource path="res://snowyOwl.tscn" type="PackedScene" id=10]
+[ext_resource path="res://owlBranch.tscn" type="PackedScene" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 720, 25 )
-
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 37.6445, 251.263 )
+extents = Vector2( 1e+07, 25 )
 
 [node name="Game" type="Node"]
 
 [node name="Control" parent="." instance=ExtResource( 3 )]
 
-[node name="Background" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-centered = false
+[node name="ParallaxBackground" parent="." instance=ExtResource( 2 )]
+
+[node name="Trees" type="Node" parent="."]
+
+[node name="Tree2" parent="Trees" instance=ExtResource( 8 )]
+position = Vector2( 664, 176 )
+
+[node name="Tree" parent="Trees" instance=ExtResource( 8 )]
+position = Vector2( 976, 184 )
+
+[node name="Tree3" parent="Trees" instance=ExtResource( 8 )]
+position = Vector2( 136, -304 )
+scale = Vector2( 3.08369, 2.80502 )
+
+[node name="owlBranches" type="Node" parent="."]
+
+[node name="owlBranch2" parent="owlBranches" instance=ExtResource( 11 )]
+position = Vector2( 1032, 152 )
+
+[node name="owlBranch" parent="owlBranches" instance=ExtResource( 11 )]
+position = Vector2( 736, 168 )
 
 [node name="hideyHole" parent="." instance=ExtResource( 6 )]
-position = Vector2( 180.169, 376.716 )
+position = Vector2( 136, 408 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 440.291, 370.983 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_bottom = 475
+
+[node name="trees" type="Sprite" parent="."]
+position = Vector2( 416, 528 )
+texture = ExtResource( 9 )
+
+[node name="TileMap" parent="." instance=ExtResource( 7 )]
+position = Vector2( -360, 0 )
+tile_data = PoolIntArray( 458729, 6, 0, 458730, 6, 0, 458731, 6, 0, 458734, 6, 0, 458737, 6, 0, 458738, 6, 0, 458739, 6, 0, 458740, 6, 0, 458741, 6, 0, 458742, 6, 0, 458746, 6, 0, 458748, 6, 0, 458749, 6, 0, 458750, 6, 0, 458751, 6, 0, 393216, 6, 0, 393221, 6, 0, 393233, 6, 0, 393234, 6, 0, 393235, 6, 0, 393236, 6, 0, 393241, 6, 0, 393242, 6, 0, 393243, 6, 0, 393244, 6, 0, 524262, 1, 0, 524263, 1, 0, 524264, 1, 0, 524265, 1, 0, 524266, 1, 0, 524267, 1, 0, 524268, 1, 0, 524269, 1, 0, 524270, 1, 0, 524271, 1, 0, 524272, 1, 0, 524273, 1, 0, 524274, 1, 0, 524275, 1, 0, 524276, 1, 0, 524277, 1, 0, 524278, 1, 0, 524279, 1, 0, 524280, 1, 0, 524281, 1, 0, 524282, 1, 0, 524283, 1, 0, 524284, 1, 0, 524285, 1, 0, 524286, 1, 0, 524287, 1, 0, 458752, 1, 0, 458753, 1, 0, 458754, 1, 0, 458755, 1, 0, 458756, 1, 0, 458757, 1, 0, 458758, 1, 0, 458759, 1, 0, 458760, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 458772, 1, 0, 458773, 1, 0, 458774, 1, 0, 458775, 1, 0, 458776, 1, 0, 458777, 1, 0, 458778, 1, 0, 458779, 1, 0, 458780, 1, 0, 458781, 1, 0, 458782, 1, 0, 458783, 1, 0, 458784, 1, 0, 458785, 1, 0, 458786, 1, 0, 458787, 1, 0, 458788, 1, 0, 458789, 1, 0, 458790, 1, 0, 458791, 1, 0, 458792, 1, 0, 458793, 1, 0, 458794, 1, 0, 458795, 1, 0, 458796, 1, 0, 458797, 1, 0, 458798, 1, 0, 458799, 1, 0, 458800, 1, 0, 458801, 1, 0, 458802, 1, 0, 458803, 1, 0, 458804, 1, 0, 458805, 1, 0, 458806, 1, 0, 458807, 1, 0 )
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2( 720, 475 )
@@ -32,9 +67,6 @@ __meta__ = {
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
 shape = SubResource( 1 )
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 440.291, 370.983 )
 
 [node name="Collectables" type="Node" parent="." groups=[
 "Food",
@@ -56,21 +88,31 @@ position = Vector2( 644.948, 313.01 )
 position = Vector2( 584.641, 270.683 )
 
 [node name="Bug6" parent="Collectables" instance=ExtResource( 4 )]
-position = Vector2( 136.071, 333.879 )
+position = Vector2( 112, 416 )
 
 [node name="Bug7" parent="Collectables" instance=ExtResource( 4 )]
 position = Vector2( 75.6604, 385.373 )
 
-[node name="Tree" type="Area2D" parent="."]
-position = Vector2( 382.049, 236.316 )
-__meta__ = {
-"_edit_group_": true
-}
+[node name="Bug8" parent="Collectables" instance=ExtResource( 4 )]
+position = Vector2( 568, 40 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
-shape = SubResource( 2 )
+[node name="Bug9" parent="Collectables" instance=ExtResource( 4 )]
+position = Vector2( 776, 56 )
+
+[node name="Bug10" parent="Collectables" instance=ExtResource( 4 )]
+position = Vector2( 744, 32 )
+
+[node name="Bug11" parent="Collectables" instance=ExtResource( 4 )]
+position = Vector2( 1048, 72 )
+
+[node name="Bug12" parent="Collectables" instance=ExtResource( 4 )]
+position = Vector2( 920, 24 )
+
+[node name="snowyOwl" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1344, 64 )
 
 [node name="background" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 441.733, 386.707 )
 stream = ExtResource( 5 )
 [connection signal="found_bug" from="Player" to="Control" method="_on_Player_found_bug"]
+[connection signal="killed" from="Player" to="Control" method="_on_Player_killed"]

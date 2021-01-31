@@ -32,6 +32,8 @@ signal killed
 func _physics_process(delta):
 	if $"/root/Globals".play == false:
 		return
+	if not alive:
+		return
 
 	var direction = Vector2.ZERO
 	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -121,8 +123,9 @@ func _on_Overlap_Area_area_entered(area):
 		tree_shape = area
 
 func _on_Overlap_Area_area_exited(area):
-	treeInRange = false
-	state = RUNNING
+	if area.name == "Tree" or area.get_parent().name == "Trees":
+		treeInRange = false
+		state = RUNNING
 
 func check_tree_side():
 	var tree_extents = tree_shape.get_child(0).shape.extents
