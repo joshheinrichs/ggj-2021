@@ -16,8 +16,7 @@ func _ready():
 	
 func _process(_delta):
 
-	if int($Mission_Timer.time_left) != 0 and $Between_Timer.time_left == 0:
-		$Between_Timer.stop()
+	if int($Mission_Timer.time_left) != 0:
 		$Items_Collected.hide()
 		current_time = mission_time - int($Mission_Timer.time_left)
 	$Time.text = String(int($Mission_Timer.time_left))
@@ -50,7 +49,7 @@ func next_day():
 	totalScore += score
 	score = 0
 	$Score.text = String(score) + "/" + String(goal)
-	$Between_Timer.start(10)
+	$"/root/Globals".play = false
 	$Mission_Timer.start(mission_time)
 	
 
