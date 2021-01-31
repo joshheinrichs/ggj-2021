@@ -70,8 +70,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
 shape = SubResource( 2 )
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="background" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 441.733, 386.707 )
 stream = ExtResource( 5 )
-autoplay = true
 [connection signal="found_bug" from="Player" to="Control" method="_on_Player_found_bug"]

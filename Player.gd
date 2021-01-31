@@ -30,7 +30,7 @@ signal found_bug
 signal killed
 
 func _physics_process(delta):
-	if not alive:
+	if $"/root/Globals".play == false:
 		return
 
 	var direction = Vector2.ZERO
@@ -45,6 +45,7 @@ func _physics_process(delta):
 		move_vec.x = 0
 		check_tree_side()
 		state = CLIMB_TREE
+		$treeMove.play()
 
 	match state:
 		IDLE:
@@ -68,6 +69,7 @@ func _physics_process(delta):
 				animatedSprite.play("idle")
 				
 			if is_on_floor() and Input.is_action_just_pressed("jump"):
+				$jump.play()
 				animatedSprite.play("glide")
 				move_vec.y = JUMP
 			
@@ -94,6 +96,7 @@ func _physics_process(delta):
 				move_vec.y = 0
 
 			if Input.is_action_just_pressed("jump"):
+				$jump.play()
 				move_vec.y = JUMP
 				move_vec.x = MAX_SPEED * direction.x
 				state = RUNNING
@@ -103,6 +106,7 @@ func _physics_process(delta):
 func _on_Overlap_Area_area_entered(area):
 	if area.is_in_group("Food"):
 		emit_signal("found_bug")
+		$pickUp.play()
 		area.queue_free()
 		
 	elif area.name == "Tree" or area.get_parent().name == "Trees":

@@ -249,3 +249,4 @@ custom_fonts/font = SubResource( 7 )
 text = "0/5 COLLECTED"
 align = 1
 [connection signal="timeout" from="Mission_Timer" to="." method="_on_Timer_timeout"]
+[connection signal="button_down" from="Items_Collected/Button" to="." method="_on_Button_button_down"]

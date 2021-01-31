@@ -3,7 +3,7 @@ extends CanvasLayer
 var goal = 5
 var score = 0
 var totalScore = 0
-var days = 0
+var days = 1
 var current_time
 var mission_time = 60
 
@@ -13,9 +13,13 @@ func _ready():
 	$Died.hide()
 	$Out_of_time.hide()
 	$Score.text = String(score) + "/" + String(goal)
+	get_parent().get_node("background").play()
 	
 func _process(_delta):
-
+	if $"/root/Globals".play == false:
+		return
+	$Day.text = "DAY " + String(days)
+	$Score.text = String(score) + "/" + String(goal)
 	if int($Mission_Timer.time_left) != 0:
 		$Items_Collected.hide()
 		current_time = mission_time - int($Mission_Timer.time_left)
@@ -47,10 +51,14 @@ func next_day():
 		$Out_of_time.show()
 		
 	days += 1
-	$Day.text = "DAY " + String(days)
-	$Mission_Timer.start(60)
 	totalScore += score
-	score = 0
-	$Score.text = String(score) + "/" + String(goal)
 	$"/root/Globals".play = false
+	get_parent().get_node("background").stop()
+
+
+func _on_Button_button_down():
+	$"/root/Globals".play=true
+	score = 0
 	$Mission_Timer.start(mission_time)
+	$"/root/Globals".totalScore = totalScore
+	get_parent().get_node("background").play()
