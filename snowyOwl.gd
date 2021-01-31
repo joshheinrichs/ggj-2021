@@ -11,7 +11,7 @@ export var MAX_VELOCITY = 500
 export var MAX_ACCELERATION = 1000
 export var RANGE = 100
 export var SWEEPS_PER_SECOND = 0.5
-export var WAIT_TIME = 5
+export var WAIT_TIME = 20
 
 var state = WAIT
 var sightAngle = 0
@@ -35,7 +35,7 @@ func _on_Timer_timeout():
 
 func start_wait():
 	state = WAIT
-	$waitTimer.start(WAIT_TIME)
+	$waitTimer.start(rand_range(0, 60))
 
 func start_patrol():
 	state = PATROL
@@ -85,8 +85,23 @@ func _process(delta):
 					if not caughtPrey:
 						start_attack(prey)
 		PATROL:
-			$Line2D.visible = false
-			$RayCast2D.enabled = false
+			
+			#start ray and beam
+			$Line2D.visible = true
+			$RayCast2D.enabled = true
+
+			#rotation of ray
+			sightAngle += deg2rad(360 * SWEEPS_PER_SECOND * delta)
+			$RayCast2D.cast_to = Vector2(cos(sightAngle)*RANGE, sin(sightAngle)*RANGE)
+			#match the red line to the ray trace
+
+			var rayCastPoints = [$RayCast2D.position, $RayCast2D.position + $RayCast2D.cast_to]
+			$Line2D.points = rayCastPoints
+			if $RayCast2D.is_colliding():
+				if $RayCast2D.get_collider().name == "Player":
+					var prey = $RayCast2D.get_collider()
+					if not caughtPrey:
+						start_attack(prey)
 
 			move_at_target(currentBranch, delta)
 
