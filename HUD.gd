@@ -13,7 +13,9 @@ func _ready():
 	$Died.hide()
 	$Out_of_time.hide()
 	$Score.text = String(score) + "/" + String(goal)
-	get_parent().get_node("background").play()
+	var background_music = get_parent().get_node("background")
+	if background_music:
+		background_music.play()
 	
 func _process(_delta):
 	if $"/root/Globals".play == false:
