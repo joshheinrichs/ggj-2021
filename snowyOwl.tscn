@@ -47,4 +47,5 @@ default_color = Color( 0.584314, 0.133333, 0.133333, 0.752941 )
 
 [node name="waitTimer" type="Timer" parent="."]
 wait_time = 10.0
+autostart = true
 [connection signal="timeout" from="waitTimer" to="." method="_on_Timer_timeout"]

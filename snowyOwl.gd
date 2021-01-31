@@ -30,6 +30,7 @@ func _process(delta):
 			#start the wait timer
 			get_node("waitTimer").set_wait_time(10)
 			get_node("waitTimer").start()
+			print(get_node("waitTimer").time_left)
 			#start ray and beam
 			get_node("Line2D").visible = true
 			get_node("RayCast2D").enabled = true
