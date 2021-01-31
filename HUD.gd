@@ -15,19 +15,19 @@ func _ready():
 	$Score.text = String(score) + "/" + String(goal)
 	
 func _process(_delta):
-	print($Between_Timer.time_left)
-	if $Between_Timer.time_left == 0:
+
+	if int($Mission_Timer.time_left) != 0 and $Between_Timer.time_left == 0:
+		$Between_Timer.stop()
 		$Items_Collected.hide()
-		if int($Mission_Timer.time_left) != 0:
-			current_time = mission_time - int($Mission_Timer.time_left)
-		$Time.text = String(int($Mission_Timer.time_left))
-		
-		if score == goal:
-			$Mission_Timer.stop()
-			$Items_Collected/Items.text = String(score) + "/" + String(goal) + " COLLECTED"
-			$Items_Collected/Time.text = "In " + String(current_time) + " Seconds"
-			$Items_Collected.show()
-			_on_Timer_timeout()
+		current_time = mission_time - int($Mission_Timer.time_left)
+	$Time.text = String(int($Mission_Timer.time_left))
+	
+	if score == goal:
+		$Mission_Timer.stop()
+		$Items_Collected/Items.text = String(score) + "/" + String(goal) + " COLLECTED"
+		$Items_Collected/Time.text = "In " + String(current_time) + " Seconds"
+		$Items_Collected.show()
+		_on_Timer_timeout()
 	
 func _on_Player_found_bug():
 	score = score + 1
@@ -51,7 +51,7 @@ func next_day():
 	score = 0
 	$Score.text = String(score) + "/" + String(goal)
 	$Between_Timer.start(10)
-	$Mission_Timer.start(60)
+	$Mission_Timer.start(mission_time)
 	
 
 
