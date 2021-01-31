@@ -10,10 +10,7 @@
 [ext_resource path="res://5.png" type="Texture" id=8]
 [ext_resource path="res://Timer.gd" type="Script" id=9]
 
-[sub_resource type="ShaderMaterial" id=7]
-
-[sub_resource type="DynamicFont" id=1]
-font_data = ExtResource( 1 )
+[sub_resource type="ShaderMaterial" id=1]
 
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 1 )
@@ -21,7 +18,10 @@ font_data = ExtResource( 1 )
 [sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 1 )
 
-[sub_resource type="AnimatedTexture" id=4]
+[sub_resource type="DynamicFont" id=4]
+font_data = ExtResource( 1 )
+
+[sub_resource type="AnimatedTexture" id=5]
 flags = 4
 frames = 5
 frame_0/texture = ExtResource( 5 )
@@ -34,10 +34,10 @@ frame_3/delay_sec = 0.0
 frame_4/texture = ExtResource( 8 )
 frame_4/delay_sec = 0.0
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 1 )
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=7]
 font_data = ExtResource( 1 )
 
 [node name="Control" type="CanvasLayer"]
@@ -45,7 +45,7 @@ script = ExtResource( 3 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
-material = SubResource( 7 )
+material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
@@ -59,7 +59,7 @@ margin_top = 15.0
 margin_right = 100.0
 margin_bottom = 29.0
 rect_scale = Vector2( 3, 3 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0/5"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -82,7 +82,7 @@ margin_top = 15.0
 margin_right = 240.0
 margin_bottom = 29.0
 rect_scale = Vector2( 3, 3 )
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Time"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -94,7 +94,7 @@ margin_top = 15.0
 margin_right = 640.0
 margin_bottom = 29.0
 rect_scale = Vector2( 3, 3 )
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "DAY 0"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,7 +106,7 @@ margin_top = 10.0
 margin_right = 662.0
 margin_bottom = 522.0
 rect_scale = Vector2( 0.1, 0.1 )
-texture = SubResource( 4 )
+texture = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -117,6 +117,7 @@ one_shot = true
 script = ExtResource( 9 )
 
 [node name="Between_Timer" type="Timer" parent="."]
+one_shot = true
 
 [node name="Items_Collected" type="VBoxContainer" parent="."]
 margin_left = 166.877
@@ -133,7 +134,7 @@ __meta__ = {
 [node name="Success" type="Label" parent="Items_Collected"]
 margin_right = 75.0
 margin_bottom = 13.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "SUCCESS!"
 align = 1
 
@@ -148,7 +149,7 @@ stretch_mode = 4
 margin_top = 35.0
 margin_right = 75.0
 margin_bottom = 48.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "0/5 COLLECTED"
 align = 1
 
@@ -156,7 +157,7 @@ align = 1
 margin_top = 52.0
 margin_right = 75.0
 margin_bottom = 65.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "IN SECONDS"
 align = 1
 
@@ -177,7 +178,7 @@ __meta__ = {
 margin_top = 8.0
 margin_right = 75.0
 margin_bottom = 21.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "OUT OF TIME"
 align = 1
 
@@ -192,7 +193,7 @@ stretch_mode = 4
 margin_top = 43.0
 margin_right = 75.0
 margin_bottom = 56.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "0/5 COLLECTED"
 align = 1
 
@@ -213,7 +214,7 @@ __meta__ = {
 margin_top = 1.0
 margin_right = 75.0
 margin_bottom = 14.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "YOU DIED"
 align = 1
 
@@ -228,7 +229,7 @@ stretch_mode = 4
 margin_top = 36.0
 margin_right = 75.0
 margin_bottom = 49.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 7 )
 text = "0/5 COLLECTED"
 align = 1
 [connection signal="timeout" from="Mission_Timer" to="." method="_on_Timer_timeout"]
