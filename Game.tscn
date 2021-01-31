@@ -36,33 +36,30 @@ shape = SubResource( 1 )
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 440.291, 370.983 )
 
-[node name="Bug" parent="." groups=[
-"Bugs",
-] instance=ExtResource( 4 )]
+[node name="Collectables" type="Node" parent="." groups=[
+"Food",
+]]
+
+[node name="Bug" parent="Collectables" instance=ExtResource( 4 )]
 position = Vector2( 503.358, 328.742 )
 
-[node name="Bug2" parent="." groups=[
-"Bugs",
-] instance=ExtResource( 4 )]
+[node name="Bug2" parent="Collectables" instance=ExtResource( 4 )]
 position = Vector2( 573.778, 301.023 )
 
-[node name="Bug3" parent="." groups=[
-"Bugs",
-] instance=ExtResource( 4 )]
+[node name="Bug3" parent="Collectables" instance=ExtResource( 4 )]
 position = Vector2( 509.351, 269.933 )
 
-[node name="Bug4" parent="." groups=[
-"Bugs",
-] instance=ExtResource( 4 )]
+[node name="Bug4" parent="Collectables" instance=ExtResource( 4 )]
 position = Vector2( 644.948, 313.01 )
 
-[node name="Bug5" parent="." groups=[
-"Bugs",
-] instance=ExtResource( 4 )]
+[node name="Bug5" parent="Collectables" instance=ExtResource( 4 )]
 position = Vector2( 584.641, 270.683 )
 
-[node name="Bug6" parent="." instance=ExtResource( 4 )]
+[node name="Bug6" parent="Collectables" instance=ExtResource( 4 )]
 position = Vector2( 136.071, 333.879 )
+
+[node name="Bug7" parent="Collectables" instance=ExtResource( 4 )]
+position = Vector2( 75.6604, 385.373 )
 
 [node name="Tree" type="Area2D" parent="."]
 position = Vector2( 382.049, 236.316 )

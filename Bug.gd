@@ -7,6 +7,7 @@ var origin
 var velocity = Vector2.ZERO
 
 func _ready():
+	add_to_group("Food")
 	origin = position
 
 func _physics_process(delta):

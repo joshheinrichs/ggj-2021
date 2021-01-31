@@ -185,6 +185,7 @@ shape = SubResource( 2 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 34 )
 animation = "glide"
+frame = 2
 playing = true
 [connection signal="area_entered" from="Overlap_Area" to="." method="_on_Overlap_Area_area_entered"]
 [connection signal="area_exited" from="Overlap_Area" to="." method="_on_Overlap_Area_area_exited"]
