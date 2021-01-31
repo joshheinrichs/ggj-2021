@@ -7,8 +7,8 @@ enum {
 	MOVE
 }
 
-const SPEED = 200
-const MAX_SPEED = 4
+const MAX_VELOCITY = 500
+const MAX_ACCELERATION = 1
 const RANGE = 100
 
 var state = WAIT
@@ -16,6 +16,10 @@ var sightAngle = 0
 
 var currentBranch
 var currentPrey
+
+var caughtPrey = false
+
+var velocity = Vector2.ZERO
 
 func _ready():
 	start_wait()
@@ -37,12 +41,34 @@ func start_patrol():
 		currentBranch = owlBranches[0]
 	else:
 		currentBranch = owlBranches[1]
+	# fly upwards at first to feel more swoopy
+	velocity = Vector2.UP * MAX_VELOCITY
 
 func start_attack(prey):
 	state = ATTACK
 	currentPrey = prey
 
+func move_at_target(target):
+	var target_vector = target.position - self.position
+	# TODO: the ideal velocity may be shorter than the max velocity
+	var ideal_velocity = target_vector.normalized() * MAX_VELOCITY
+	
+	var acceleration = ideal_velocity - velocity
+	if acceleration.length() > MAX_ACCELERATION:
+		acceleration = acceleration.normalized() * MAX_ACCELERATION
+	velocity += acceleration
+	if velocity.length() > MAX_VELOCITY:
+		acceleration = acceleration.normalized() * MAX_ACCELERATION
+
+	move_and_slide(velocity)
+
+
 func _process(delta):
+	if caughtPrey:
+		currentPrey.position = self.position
+		# TODO: kinda hacky, should call currentPrey.caught() or something to fix camera jitters
+		currentPrey.move_vec = Vector2.ZERO
+
 	match state:
 		WAIT:
 			#start ray and beam
@@ -59,15 +85,17 @@ func _process(delta):
 			if $RayCast2D.is_colliding():
 				if $RayCast2D.get_collider().name == "Player":
 					var prey = $RayCast2D.get_collider()
-					start_attack(prey)
+					if not caughtPrey:
+						start_attack(prey)
 		PATROL:
 			$Line2D.visible = false
 			$RayCast2D.enabled = false
 
-			var velocity = (currentBranch.position-self.position).normalized() * SPEED
-			move_and_slide(velocity)
+			move_at_target(currentBranch)
+
 			for thing in $Area2D.get_overlapping_areas():
 				if thing == currentBranch:
+					velocity = Vector2.ZERO
 					start_wait()
 		ATTACK:
 			$Line2D.visible = true
@@ -75,6 +103,11 @@ func _process(delta):
 
 			var points = [$RayCast2D.position, currentPrey.position - self.position]
 			$Line2D.points = points
+			
+			move_at_target(currentPrey)
 
-			var velocity = (currentPrey.position-self.position).normalized() * SPEED
-			move_and_slide(velocity)
+			for thing in $Area2D.get_overlapping_areas():
+				if thing.get_parent() == currentPrey:
+					caughtPrey = true
+					# TODO: grab prey
+					start_patrol()
