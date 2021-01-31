@@ -18,6 +18,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
+RANGE = 400
+SWEEPS_PER_SECOND = 0.3
 
 [node name="Area2D" type="Area2D" parent="."]
 
