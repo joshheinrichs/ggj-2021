@@ -7,9 +7,9 @@ enum {
 	MOVE
 }
 
-const MAX_VELOCITY = 500
-const MAX_ACCELERATION = 1
-const RANGE = 100
+export var MAX_VELOCITY = 500
+export var MAX_ACCELERATION = 0.5
+export var RANGE = 100
 
 var state = WAIT
 var sightAngle = 0
@@ -25,8 +25,10 @@ func _ready():
 	start_wait()
 
 func _on_Timer_timeout():
-	if state == ATTACK:
+	if state != WAIT:
 		return
+	# fly upwards at first to feel more swoopy
+	velocity = Vector2.UP * MAX_VELOCITY
 	start_patrol()
 
 func start_wait():
@@ -41,8 +43,6 @@ func start_patrol():
 		currentBranch = owlBranches[0]
 	else:
 		currentBranch = owlBranches[1]
-	# fly upwards at first to feel more swoopy
-	velocity = Vector2.UP * MAX_VELOCITY
 
 func start_attack(prey):
 	state = ATTACK
