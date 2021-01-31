@@ -10,6 +10,8 @@ enum {
 export var MAX_VELOCITY = 500
 export var MAX_ACCELERATION = 1000
 export var RANGE = 100
+export var SWEEPS_PER_SECOND = 0.5
+export var WAIT_TIME = 5
 
 var state = WAIT
 var sightAngle = 0
@@ -33,7 +35,7 @@ func _on_Timer_timeout():
 
 func start_wait():
 	state = WAIT
-	$waitTimer.start(3)
+	$waitTimer.start(WAIT_TIME)
 
 func start_patrol():
 	state = PATROL
@@ -62,7 +64,6 @@ func move_at_target(target, delta):
 
 	move_and_slide(velocity)
 
-
 func _process(delta):
 	if caughtPrey:
 		currentPrey.position = self.position + Vector2(0, $CollisionShape2D.shape.height)
@@ -76,7 +77,7 @@ func _process(delta):
 			$RayCast2D.enabled = true
 
 			#rotation of ray
-			sightAngle += deg2rad(360 * delta)
+			sightAngle += deg2rad(360 * SWEEPS_PER_SECOND * delta)
 			$RayCast2D.cast_to = Vector2(cos(sightAngle)*RANGE, sin(sightAngle)*RANGE)
 			#match the red line to the ray trace
 
@@ -103,8 +104,14 @@ func _process(delta):
 
 			var points = [$RayCast2D.position, currentPrey.position - self.position]
 			$Line2D.points = points
-			
+
 			move_at_target(currentPrey, delta)
+
+			# TODO: could abort attack near target if it comes in too fast or starts the attack while flying away
+			var next_position = self.position + velocity * delta
+			var missed_target = (currentPrey.position - self.position).length() < (currentPrey.position - next_position).length()
+			if missed_target:
+				start_patrol()
 
 			for thing in $Area2D.get_overlapping_areas():
 				if thing.get_parent() == currentPrey:
