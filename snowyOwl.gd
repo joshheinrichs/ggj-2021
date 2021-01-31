@@ -8,7 +8,7 @@ enum {
 }
 
 export var MAX_VELOCITY = 500
-export var MAX_ACCELERATION = 0.5
+export var MAX_ACCELERATION = 1000
 export var RANGE = 100
 
 var state = WAIT
@@ -48,17 +48,17 @@ func start_attack(prey):
 	state = ATTACK
 	currentPrey = prey
 
-func move_at_target(target):
+func move_at_target(target, delta):
 	var target_vector = target.position - self.position
 	# TODO: the ideal velocity may be shorter than the max velocity
 	var ideal_velocity = target_vector.normalized() * MAX_VELOCITY
 	
-	var acceleration = ideal_velocity - velocity
+	var acceleration = (ideal_velocity - velocity) / delta
 	if acceleration.length() > MAX_ACCELERATION:
 		acceleration = acceleration.normalized() * MAX_ACCELERATION
-	velocity += acceleration
+	velocity += acceleration * delta
 	if velocity.length() > MAX_VELOCITY:
-		acceleration = acceleration.normalized() * MAX_ACCELERATION
+		velocity = velocity.normalized() * MAX_VELOCITY
 
 	move_and_slide(velocity)
 
@@ -91,7 +91,7 @@ func _process(delta):
 			$Line2D.visible = false
 			$RayCast2D.enabled = false
 
-			move_at_target(currentBranch)
+			move_at_target(currentBranch, delta)
 
 			for thing in $Area2D.get_overlapping_areas():
 				if thing == currentBranch:
@@ -104,7 +104,7 @@ func _process(delta):
 			var points = [$RayCast2D.position, currentPrey.position - self.position]
 			$Line2D.points = points
 			
-			move_at_target(currentPrey)
+			move_at_target(currentPrey, delta)
 
 			for thing in $Area2D.get_overlapping_areas():
 				if thing.get_parent() == currentPrey:
