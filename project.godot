@@ -15,7 +15,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="global game jam 2021"
+config/name="Owls on the Prowl"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 

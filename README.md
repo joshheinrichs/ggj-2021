@@ -1,2 +1,2 @@
-# ggj-2021
+# Owls on the Prowl
 regina global game jam 2021
