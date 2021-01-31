@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/81 Contryside in Summertime.ogg-2eca4b3e9cb3085565db34c268e601eb.oggstr"
+
+[deps]
+
+source_file="res://Asset/sound/81 Contryside in Summertime.ogg"
+dest_files=[ "res://.import/81 Contryside in Summertime.ogg-2eca4b3e9cb3085565db34c268e601eb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
