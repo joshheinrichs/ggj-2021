@@ -99,10 +99,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Mission_Timer" type="Timer" parent="."]
 wait_time = 60.0
-autostart = true
+one_shot = true
 script = ExtResource( 9 )
+
+[node name="Between_Timer" type="Timer" parent="."]
 
 [node name="Items_Collected" type="VBoxContainer" parent="."]
 margin_left = 166.877
@@ -117,25 +119,104 @@ __meta__ = {
 }
 
 [node name="Success" type="Label" parent="Items_Collected"]
-margin_top = 1.0
 margin_right = 75.0
-margin_bottom = 14.0
+margin_bottom = 13.0
 custom_fonts/font = SubResource( 5 )
 text = "SUCCESS!"
 align = 1
 
 [node name="TextureRect" type="TextureRect" parent="Items_Collected"]
+margin_top = 17.0
+margin_right = 75.0
+margin_bottom = 31.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="Items" type="Label" parent="Items_Collected"]
+margin_top = 35.0
+margin_right = 75.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 6 )
+text = "0/5 COLLECTED"
+align = 1
+
+[node name="Time" type="Label" parent="Items_Collected"]
+margin_top = 52.0
+margin_right = 75.0
+margin_bottom = 65.0
+custom_fonts/font = SubResource( 6 )
+text = "IN SECONDS"
+align = 1
+
+[node name="Out_of_time" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 166.877
+margin_top = 101.823
+margin_right = 241.877
+margin_bottom = 151.823
+rect_scale = Vector2( 5, 5 )
+alignment = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Out_of_time"]
+margin_top = 8.0
+margin_right = 75.0
+margin_bottom = 21.0
+custom_fonts/font = SubResource( 5 )
+text = "OUT OF TIME"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Out_of_time"]
+margin_top = 25.0
+margin_right = 75.0
+margin_bottom = 39.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Out_of_time"]
+margin_top = 43.0
+margin_right = 75.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 6 )
+text = "0/5 COLLECTED"
+align = 1
+
+[node name="Died" type="VBoxContainer" parent="."]
+visible = false
+margin_left = 166.877
+margin_top = 101.823
+margin_right = 241.877
+margin_bottom = 151.823
+rect_scale = Vector2( 5, 5 )
+alignment = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Died"]
+margin_top = 1.0
+margin_right = 75.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 5 )
+text = "YOU DIED"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Died"]
 margin_top = 18.0
 margin_right = 75.0
 margin_bottom = 32.0
 texture = ExtResource( 2 )
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="Items_Collected"]
+[node name="Label" type="Label" parent="Died"]
 margin_top = 36.0
 margin_right = 75.0
 margin_bottom = 49.0
 custom_fonts/font = SubResource( 6 )
 text = "0/5 COLLECTED"
 align = 1
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="Mission_Timer" to="." method="_on_Timer_timeout"]

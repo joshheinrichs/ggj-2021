@@ -103,7 +103,7 @@ func _physics_process(delta):
 	move_vec = move_and_slide(move_vec, UP)
 			
 func _on_Overlap_Area_area_entered(area):
-	if area.name == "Bug" or area.get_parent().name == "Bugs":
+	if area.is_in_group("Bugs"):
 		emit_signal("found_bug")
 		# TODO: is there a better way to remove food?
 		area.queue_free()
