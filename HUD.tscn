@@ -1,31 +1,141 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Asset/1980v202001.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Asset/pepper.png" type="Texture" id=2]
 [ext_resource path="res://HUD.gd" type="Script" id=3]
+[ext_resource path="res://2.png" type="Texture" id=4]
+[ext_resource path="res://1.png" type="Texture" id=5]
+[ext_resource path="res://4.png" type="Texture" id=6]
+[ext_resource path="res://3.png" type="Texture" id=7]
+[ext_resource path="res://5.png" type="Texture" id=8]
+[ext_resource path="res://Timer.gd" type="Script" id=9]
 
 [sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+font_data = ExtResource( 1 )
+
+[sub_resource type="AnimatedTexture" id=4]
+flags = 4
+frames = 5
+frame_0/texture = ExtResource( 5 )
+frame_1/texture = ExtResource( 4 )
+frame_1/delay_sec = 0.0
+frame_2/texture = ExtResource( 7 )
+frame_2/delay_sec = 0.0
+frame_3/texture = ExtResource( 6 )
+frame_3/delay_sec = 0.0
+frame_4/texture = ExtResource( 8 )
+frame_4/delay_sec = 0.0
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=6]
 font_data = ExtResource( 1 )
 
 [node name="Control" type="CanvasLayer"]
 script = ExtResource( 3 )
 
 [node name="Score" type="Label" parent="."]
-margin_left = 25.0
+margin_left = 75.0
 margin_top = 15.0
-margin_right = 50.0
+margin_right = 100.0
 margin_bottom = 29.0
 rect_scale = Vector2( 3, 3 )
 custom_fonts/font = SubResource( 1 )
 text = "0/5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Icon" type="TextureRect" parent="."]
-margin_left = 100.0
+margin_left = 15.0
 margin_top = 25.0
-margin_right = 125.0
+margin_right = 40.0
 margin_bottom = 39.0
 rect_scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Time" type="Label" parent="."]
+margin_left = 200.0
+margin_top = 15.0
+margin_right = 240.0
+margin_bottom = 29.0
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = SubResource( 2 )
+text = "Time"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Day" type="Label" parent="."]
+margin_left = 600.0
+margin_top = 15.0
+margin_right = 640.0
+margin_bottom = 29.0
+rect_scale = Vector2( 3, 3 )
+custom_fonts/font = SubResource( 3 )
+text = "DAY 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 150.0
+margin_top = 10.0
+margin_right = 662.0
+margin_bottom = 522.0
+rect_scale = Vector2( 0.1, 0.1 )
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+script = ExtResource( 9 )
+
+[node name="Items_Collected" type="VBoxContainer" parent="."]
+margin_left = 166.877
+margin_top = 101.823
+margin_right = 241.877
+margin_bottom = 151.823
+rect_scale = Vector2( 5, 5 )
+alignment = 1
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Success" type="Label" parent="Items_Collected"]
+margin_top = 1.0
+margin_right = 75.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 5 )
+text = "SUCCESS!"
+align = 1
+
+[node name="TextureRect" type="TextureRect" parent="Items_Collected"]
+margin_top = 18.0
+margin_right = 75.0
+margin_bottom = 32.0
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Items_Collected"]
+margin_top = 36.0
+margin_right = 75.0
+margin_bottom = 49.0
+custom_fonts/font = SubResource( 6 )
+text = "0/5 COLLECTED"
+align = 1
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

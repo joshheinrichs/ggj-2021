@@ -79,8 +79,9 @@ func _physics_process(delta):
 func _on_Overlap_Area_area_entered(area):
 	if area.name == "Bug":
 		emit_signal("found_bug")
-	treeInRange = true
-	current_area = area
+	if area.name == "Tree":
+		treeInRange = true
+		current_area = area
 		
 
 func _on_Overlap_Area_area_exited(area):
