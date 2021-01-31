@@ -21,6 +21,8 @@ func _ready():
 	start_wait()
 
 func _on_Timer_timeout():
+	if state == ATTACK:
+		return
 	start_patrol()
 
 func start_wait():
@@ -28,13 +30,13 @@ func start_wait():
 	$waitTimer.start(3)
 
 func start_patrol():
-		state = PATROL
-		var owlBranches = get_tree().get_nodes_in_group("owlBranchGroup")
-		owlBranches.shuffle()
-		if owlBranches[0] != currentBranch:
-			currentBranch = owlBranches[0]
-		else:
-			currentBranch = owlBranches[1]
+	state = PATROL
+	var owlBranches = get_tree().get_nodes_in_group("owlBranchGroup")
+	owlBranches.shuffle()
+	if owlBranches[0] != currentBranch:
+		currentBranch = owlBranches[0]
+	else:
+		currentBranch = owlBranches[1]
 
 func start_attack(prey):
 	state = ATTACK
@@ -68,8 +70,11 @@ func _process(delta):
 				if thing == currentBranch:
 					start_wait()
 		ATTACK:
-			$Line2D.visible = false
+			$Line2D.visible = true
 			$RayCast2D.enabled = false
+
+			var points = [$RayCast2D.position, currentPrey.position - self.position]
+			$Line2D.points = points
 
 			var velocity = (currentPrey.position-self.position).normalized() * SPEED
 			move_and_slide(velocity)
