@@ -15,9 +15,9 @@ const UP = Vector2(0,-1)
 const MAX_SPEED = 350
 const ACCEL = 3000
 const DECEL = 10
-const GRAVITY = 25
+const GRAVITY = 2000
 const JUMP = -650
-const GLIDE = 50
+const GLIDE_ACCEL = 750
 
 var move_vec = Vector2.ZERO
 var tree_shape
@@ -37,15 +37,18 @@ func _physics_process(delta):
 	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	direction.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 
-	move_vec.y += GRAVITY
+	move_vec.y += GRAVITY * delta
 		
-	if treeInRange == true && Input.is_action_just_pressed("move_up"):
-		if flipped_sprite == false:
-			rotate_sprite()
+	if state == RUNNING and treeInRange == true && Input.is_action_pressed("move_up") and move_vec.y > 0:
 		move_vec.x = 0
 		check_tree_side()
 		state = CLIMB_TREE
 		$treeMove.play()
+
+	if state == CLIMB_TREE:
+		animatedSprite.rotation = deg2rad(90)
+	else:
+		animatedSprite.rotation = deg2rad(0)
 
 	match state:
 		IDLE:
@@ -67,18 +70,19 @@ func _physics_process(delta):
 					move_vec.x += (direction.x * ACCEL * delta)
 			else:
 				animatedSprite.play("idle")
-				
+
 			if is_on_floor() and Input.is_action_just_pressed("jump"):
 				$jump.play()
 				animatedSprite.play("glide")
 				move_vec.y = JUMP
+				state = RUNNING
 			
 			if !is_on_floor():
 				animatedSprite.play("glide")
 			
-#			if Input.is_action_pressed("jump") and move_vec.y > GLIDE:
-#				move_vec.y = GLIDE
-				
+			if not is_on_floor() and Input.is_action_pressed("jump"):
+				move_vec.y -= GLIDE_ACCEL * delta
+
 		CLIMB_TREE:
 
 			if direction != Vector2.ZERO:
@@ -94,6 +98,9 @@ func _physics_process(delta):
 			else:
 				animatedSprite.play("idle")
 				move_vec.y = 0
+			
+			if is_on_floor():
+				state = RUNNING
 
 			if Input.is_action_just_pressed("jump"):
 				$jump.play()
@@ -115,25 +122,14 @@ func _on_Overlap_Area_area_entered(area):
 
 func _on_Overlap_Area_area_exited(area):
 	treeInRange = false
-	if flipped_sprite == true:
-		rotate_sprite()
 	state = RUNNING
-	
 
-func rotate_sprite():
-	if flipped_sprite == false:
-		animatedSprite.rotate(deg2rad(90))
-		flipped_sprite = true
-	else:
-		animatedSprite.rotate(deg2rad(-90))
-		flipped_sprite = false
-
-func check_tree_side():		
+func check_tree_side():
+	var tree_extents = tree_shape.get_child(0).shape.extents
 	if self.position.x < tree_shape.position.x:
-		self.position.x = tree_shape.position.x - (tree_shape.get_child(0).shape.extents.x)
-		
+		self.position.x = tree_shape.position.x - (tree_extents.x)
 	if self.position.x > tree_shape.position.x:
-		self.position.x = tree_shape.position.x + (tree_shape.get_child(0).shape.extents.x)
+		self.position.x = tree_shape.position.x + (tree_extents.x)
 
 func kill():
 	self.alive = false
